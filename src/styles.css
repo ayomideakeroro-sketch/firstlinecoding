@@ -1,0 +1,124 @@
+@import "tailwindcss" source("../");
+
+@theme {
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-sans: 'IBM Plex Sans', ui-sans-serif, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, Menlo, monospace;
+
+  --color-paper: #f6f1e7;
+  --color-paper-deep: #ece4d3;
+  --color-ink: #1d1b18;
+  --color-ink-soft: #4a453d;
+  --color-muted: #857d70;
+  --color-line: #d9cfbc;
+  --color-tomato: #d9482b;
+  --color-tomato-deep: #b3361c;
+  --color-moss: #3f7a4f;
+  --color-mustard: #e0a526;
+  --color-night: #1f2126;
+  --color-night-soft: #2a2d33;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  background: var(--color-paper);
+  color: var(--color-ink);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Faint notebook grid behind every page */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  background-image:
+    linear-gradient(to right, rgb(29 27 24 / 0.035) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(29 27 24 / 0.035) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+code,
+pre,
+textarea.code-input {
+  font-family: var(--font-mono);
+}
+
+::selection {
+  background: rgb(217 72 43 / 0.25);
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.rise {
+  animation: rise 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+.caret {
+  animation: blink 1.1s steps(1) infinite;
+}
+
+/* Editor: transparent textarea layered over highlighted code */
+.code-layer {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  line-height: 1.6;
+  tab-size: 2;
+  white-space: pre;
+  padding: 16px;
+  margin: 0;
+  letter-spacing: 0;
+}
+
+/* Syntax colors tuned to the night editor */
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-built_in { color: #f08a6c; }
+.hljs-string,
+.hljs-attr,
+.hljs-selector-class { color: #b5d68a; }
+.hljs-number,
+.hljs-literal { color: #e8c170; }
+.hljs-comment { color: #7d8290; font-style: italic; }
+.hljs-title,
+.hljs-title.function_,
+.hljs-name,
+.hljs-selector-id { color: #8cc4e8; }
+.hljs-attribute,
+.hljs-property { color: #d7a6e0; }
+.hljs-tag { color: #9aa0ab; }
+
+.prose-lesson p { margin: 0 0 0.9rem; line-height: 1.7; color: var(--color-ink-soft); }
+.prose-lesson code {
+  font-size: 0.86em;
+  background: var(--color-paper-deep);
+  padding: 0.1em 0.35em;
+  border-radius: 4px;
+  color: var(--color-ink);
+}
+.prose-lesson pre {
+  background: var(--color-night);
+  color: #e6e2d9;
+  border-radius: 10px;
+  padding: 14px 16px;
+  font-size: 13px;
+  line-height: 1.6;
+  overflow-x: auto;
+  margin: 0 0 1rem;
+}
+.prose-lesson pre code { background: none; padding: 0; color: inherit; }
